@@ -77,17 +77,18 @@ https://www.npmjs.com/package/mqtt
 ### NODE.js with Docker
 
 
-npm install -y
+    $ npm install -y
 
-touch index.js
-touch Dockerfile
-touch .dockerignore
+    $ touch index.js
+    $ touch Dockerfile
+    $ touch .dockerignore
 
 package.json
-    
+        
     "scripts": {
         "start": "node index.js"
     }
+    
 
 
 create img
@@ -123,3 +124,26 @@ Add file docker-compose.yml
 run
 
     $ docker-compose up
+
+## MQTT
+
+### With nodejs
+- https://medium.com/@alifabdullah/using-mqtt-protocol-with-node-js-f0eb8065b5b6
+- https://medium.com/@czarantoniodesouza/experimentando-a-node-mcu-com-nodejs-e-mqtt-798bc5666d2f
+
+### Docker
+
+docker hub
+
+    $ docker pull eclipse-mosquitto
+
+run
+
+    $ docker run -it -p 1883:1883 -p 9001:9001 -v mosquitto.conf:/mosquitto/config/mosquitto.conf -v /mosquitto/data -v /mosquitto/log eclipse-mosquitto
+
+
+
+## Postgres
+
+Tutorials
+- https://levelup.gitconnected.com/build-a-multi-container-application-with-docker-compose-460f6199ef3c
