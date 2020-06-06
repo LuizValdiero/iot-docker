@@ -29,6 +29,14 @@ substitua 1.25.4 pela versao desejada
     $ sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     $ sudo chmod +x /usr/local/bin/docker-compose
 
+Commands
+```
+docker-compose up
+docker-compose stop
+
+//update service XXX
+docker-compose build XXX
+```
 
 Uninstall
     $ sudo rm /usr/local/bin/docker-compose
@@ -163,9 +171,13 @@ MQTTBox
 
 ## mongoDB
 
+Create container with docker-compose
+
 ### configure with Studio3t
 
 - https://github.com/alvarowolfx/smart-home-mqtt
+
+localhost:27017
 
 mongoDB shell
 
