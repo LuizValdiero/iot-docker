@@ -34,7 +34,10 @@ services:
       DOCKER_VERNEMQ_VMQ_DIVERSITY__MONGODB__LOGIN: vernemq
       DOCKER_VERNEMQ_VMQ_DIVERSITY__MONGODB__PASSWORD: vernemq
       DOCKER_VERNEMQ_VMQ_DIVERSITY__MONGODB__DATABASE: devices
-      
+      # Webhooks
+      DOCKER_VERNEMQ_PLUGINS__VMQ_WEBHOOKS: "on"
+      DOCKER_VERNEMQ_VMQ_WEBHOOKS__WORKER1__HOOK: "on_publish"
+      DOCKER_VERNEMQ_VMQ_WEBHOOKS__WORKER1__ENDPOINT: "http://worker:8080/webhook"      
 
   mongo:
     image: mongo
@@ -46,4 +49,20 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
-    
+  
+  worker:
+    restart: always
+    build: "./webhook-worker"
+    user: "node"
+    ports:
+      - "8080:8080"
+    expose:
+      - 8080
+    links:
+      - "mongo:database"
+    environment:
+      NODE_ENV: production
+      PORT: 8080
+      DB_URL: "mongodb://vernemq:vernemq@database:27017/devices"
+    depends_on:
+      - mongo
